@@ -16,7 +16,7 @@ The code intends to perform the following tasks:
 - Count the amount of SNPs (homozygote and heterozygotes) per dog breed in order to quantify the genetic load on a per-sample basis.
 - Explore mutation data, compare different dog weight classes across weight classes, and perform a correlation analysis between dog body weight and genetic load metrics.
 
-### Input:
+## Input:
 - Nuclear VCF files storing SNPs per individual dog sample, relative to a dog reference genome (German Shepherd), including information such as specific genomic location (chromosome, start and end position) and allelic variants.
 
 ## Output:
@@ -24,7 +24,7 @@ The code intends to perform the following tasks:
 - Annotated VCF file obtained with SnpEff. The tool appends an annotation column with the predicted effect type, putative impact, and allelic variant of each SNP.
 - Genotype-level tsv files, containing SNP counts per dog sample.
 
-### Code list and description:
+## Code list and description:
 All code used for the study and belonging to each analysis is listed:
 
 ### Core Genetic Load Pipeline
@@ -50,5 +50,5 @@ All code used for the study and belonging to each analysis is listed:
       - [`data_conversion_nonsyn.sh`](./code/2_SNPeff/data_conversion_nonsyn.sh)
 - **Data Analysis and Visualization study of genetic variation and genetic load metrics:** [`genetic_load.sh`](./code/2_SNPeff/genetic_load.sh)
 
-# References
+## References
 1.- Meadows, J.R.S., Kidd, J.M., Wang, G., et al. (2023) ‘Genome sequencing of 2000 canids by the Dog10K consortium advances the understanding of demography, genome function and architecture’, Genome Biology, 24, p. 187. https://doi.org/10.1186/s13059-023-03023-7.
