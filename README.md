@@ -14,8 +14,8 @@ Study the association between dog body weight and genetic load in mitochondrial-
 ### Code specifics:
 The code intends to perform the following tasks:
 - Filter large VCF files tracking SNPs in the nuclear genome and predict their effect on gene features using SnpEff.
-- Explore mutation data, compare different dog weight classesacross weight classes, and perform a correlation analysis between dog body weight and genetic load metrics.
-- 
+- Explore mutation data, compare different dog weight classes across weight classes, and perform a correlation analysis between dog body weight and genetic load metrics.
+
 ### Input:
 - Nuclear VCF files storing SNPs per individual dog sample relative to a dog reference genome German sheepherd, including information such as specific genomic location (chromosome, start and end position) and allelic variants per sample.
 
