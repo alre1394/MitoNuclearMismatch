@@ -17,16 +17,16 @@ The code intends to perform the following tasks:
 - Explore mutation data, compare different dog weight classesacross weight classes, and perform a correlation analysis between dog body weight and genetic load metrics.
 - 
 ### Input:
-### - Nuclear VCF files storing SNPs per individual dog sample relative to a dog reference genome German sheepherd, including information such as specific genomic location (chromosome, start and end position) and allelic variants per sample.
+- Nuclear VCF files storing SNPs per individual dog sample relative to a dog reference genome German sheepherd, including information such as specific genomic location (chromosome, start and end position) and allelic variants per sample.
 
 ## Output:
-### - Filtered VCF files obtained with bcftools. The file excludes non-mitochondrial genes.
-### - Annotated VCF file obtained with SnpEff. The tool appends an annotation column (8th) with the predicted effect type, putative impact, allelic variant per each SNP.
+- Filtered VCF files obtained with bcftools. The file excludes non-mitochondrial genes.
+- Annotated VCF file obtained with SnpEff. The tool appends an annotation column (8th) with the predicted effect type, putative impact, allelic variant per each SNP.
 
-### Annotated VCF
+### Code list and description:
 All code used for the study and belonging to each analysis is listed:
-### Core Genetic Load Pipeline
 
+### Core Genetic Load Pipeline
 - **Build target region + subset VCF:** [`vcf_filtering_translation.txt`](./vcf_filtering_translation.txt)  
 - **Subsetting genome-wide VCF to mito-nuclear gene regions (excluding coyotes):** [`bcftools.sh`](./bcftools.sh)
 - **Subsetting ChrX (non-PAR) VCF to mito-nuclear genes (excluding coyotes):** [`bcftools_chrx.sh`](./bcftools_chrx.sh)
