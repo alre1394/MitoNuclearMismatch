@@ -1,27 +1,28 @@
 # Mito-nuclear mismatch
-Store scripts utilized in the mito-nuclear mismatch project. An exploratory analysis was conducted to find evidence between the genetic load and life expectancy across multiple dog breeds.
-Effectat the nuclear genome was quantified bases on predicted annotations
+Store scripts utilized in the mito-nuclear mismatch project. An exploratory analysis was conducted to find evidence that explains the inverse correlation between dog lifespan and body weight, particularly in relation to mitochondrial dysfuntion. The project scope was to quantify the genetic load in mitochondrial genes located in the nuclear genome (mito-nuclear genes), based on predicted annotations obtained through an open source tool. The project leveraged the already existing data from the Dog10K project [1], one of the largest dog genomics efforts, including nearly 2,000 whole-genome sequenced dogs Project.
 
 ## Overall aim:
-Study the association between dog body weight and genetic load in mitochondrial-related nuclear-encoded (mito-nuclear) genes.
+Study the association between dog body weight and genetic load in mito-nuclear genes across different dog breeds.
 
 ## Specific aims: 
-  - Process Variant Call Format (VCF) files containing mutation data
-  - Annotate genetic mutations based on their predicted effect type and putative impact
-  - Quantify genetic load per dog individual
-  - Exploratory data analysis of mutation data
-  - 
+  - Filter nuclear Variant Call Format (VCF) files containing genetic variation data, in the form of single nucleotide polymorphisms (SNPs).
+  - Annotate genetic mutations based on their predicted effect type and putative impact using an existing annotation tool (SnpEff).
+  - Quantify genetic load per dog individual by extracting and counting "highly deleterious" SNPs (HIGH/MEDIUM impact) per dog sample.
+  - Conduct an exploratory data analysis of genetic load estimations using dog body weight, as a lifespan proxy.
+
 ### Code specifics:
 The code intends to perform the following tasks:
 - Filter large VCF files tracking SNPs in the nuclear genome and predict their effect on gene features using SnpEff.
+- Count the amount of SNPs (homozygote and heterozygotes) per dog breed in order to quantify the genetic load on a per-sample basis.
 - Explore mutation data, compare different dog weight classes across weight classes, and perform a correlation analysis between dog body weight and genetic load metrics.
 
 ### Input:
-- Nuclear VCF files storing SNPs per individual dog sample relative to a dog reference genome German sheepherd, including information such as specific genomic location (chromosome, start and end position) and allelic variants per sample.
+- Nuclear VCF files storing SNPs per individual dog sample, relative to a dog reference genome (German Shepherd), including information such as specific genomic location (chromosome, start and end position) and allelic variants.
 
 ## Output:
-- Filtered VCF files obtained with bcftools. The file excludes non-mitochondrial genes.
-- Annotated VCF file obtained with SnpEff. The tool appends an annotation column (8th) with the predicted effect type, putative impact, allelic variant per each SNP.
+- Filtered VCF files obtained with bcftools. The file excludes non-mitochondrial genes and any coyote sample, due their high variation.
+- Annotated VCF file obtained with SnpEff. The tool appends an annotation column with the predicted effect type, putative impact, and allelic variant of each SNP.
+- Genotype-level tsv files, containing SNP counts per dog sample.
 
 ### Code list and description:
 All code used for the study and belonging to each analysis is listed:
@@ -39,13 +40,15 @@ All code used for the study and belonging to each analysis is listed:
 - **Annotation of VCF file for Nuclear Autosome + Chrx-NonPar SNPs:** [`annotation_SNPeff.sh`](./code/2_SNPeff/annotation_SNPeff.sh)  
 - **Pathway-level genetic load analyses:**
   - **Filtering annotated VCF files, data extraction and conversion - General Impact, Synonymous and Nonsynonymous Variant Analysis:**
-    - **Data Extraction**:
+    - **Data Extraction - the annotated VCF file is filtered by the respective annotation label/tag (HIGH/MEDIUM impact, synonymous or nonsynonymous effect type)**:
       - [`general_impact_extract.sh`](./code/2_SNPeff/general_impact_extract.sh)
       - [`syn_extract.sh`](./code/2_SNPeff/syn_extract.sh)
       - [`nonsyn_extract.sh`](./code/2_SNPeff/nonsyn_extract.sh)
-    - **Data Conversion**:
+    - **Data Conversion - creation of genotype-level tables, it counts the number of SNPs per dog sample in the filtered VCF files**:
       - [`data_conversion_impact.sh`](./code/2_SNPeff/data_conversion_impact.sh)
       - [`syn_extract.sh`](./code/2_SNPeff/syn_extract.sh)
       - [`data_conversion_nonsyn.sh`](./code/2_SNPeff/data_conversion_nonsyn.sh)
 - **Data Analysis and Visualization study of genetic variation and genetic load metrics:** [`genetic_load.sh`](./code/2_SNPeff/genetic_load.sh)
 
+# References
+1.- Meadows, J.R.S., Kidd, J.M., Wang, G., et al. (2023) ‘Genome sequencing of 2000 canids by the Dog10K consortium advances the understanding of demography, genome function and architecture’, Genome Biology, 24, p. 187. https://doi.org/10.1186/s13059-023-03023-7.
